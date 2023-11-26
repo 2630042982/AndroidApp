@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">MyFirstApplication</string>
-    <string name="string_1">hello_world</string>
+    <string name="text_vciew_hellow_world">你好Android</string>
 </resources>
