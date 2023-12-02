@@ -3,4 +3,8 @@
     <string name="text_vciew_hellow_world">你好Android</string>
     <string name="textView1">你好</string>
     <string name="textView2">JNU</string>
+    <string name="change_text_button">change_text</string>
+    <string name="string_ok">ok</string>
+    <string name="string_null"> </string>
+    <string name="taskname1">task1</string>
 </resources>

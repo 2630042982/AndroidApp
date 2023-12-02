@@ -45,23 +45,32 @@
         android:layout_height="wrap_content"
         android:onClick="changeText"
 
-        android:text="change text"
+        android:text="@string/change_text_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/textView1"
-        tools:layout_editor_absoluteX="118dp"
-        tools:layout_editor_absoluteY="455dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:padding="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        android:layout_width="105dp"
+        android:layout_height="237dp"
+        android:longClickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/textView1"
+        app:layout_constraintEnd_toStartOf="@+id/text_vciew_hellow_world"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.617" />
 
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/recyclerView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:padding="8dp"-->
+    <!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+    <!--        tools:layout_editor_absoluteX="28dp"-->
+    <!--        tools:layout_editor_absoluteY="42dp" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
