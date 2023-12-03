@@ -5,6 +5,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+//import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ActionMode;
@@ -28,12 +30,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jnu.student.TaskItem;
-
+import com.jnu.student.DataBank;
 
 
 public class MainActivity extends AppCompatActivity {
     private TextView textView1, textView2;
     private Button chang_text_button;
+
+    private TaskItemAdapter taskItemAdapter;
+
+    private ArrayList<TaskItem> taskList=new ArrayList<>();
 
 //    private MyAdapter adapter;
 //    private MyAdapter context_menu_adapter;
@@ -52,16 +58,18 @@ public class MainActivity extends AppCompatActivity {
         mainRecyclerview.setLayoutManager(new LinearLayoutManager(this));
 
 
-        ArrayList<TaskItem> taskList = new ArrayList<>();
-        // 添加一些示例数据
-        taskList.add(new TaskItem("学高数",R.drawable.task_2));
-        taskList.add(new TaskItem("进行Android开发",R.drawable.task_2));
-        taskList.add(new TaskItem("吃饭",R.drawable.task_2));
-        taskList.add(new TaskItem("午休",R.drawable.task_2));
-        taskList.add(new TaskItem("继续进行Android开发",R.drawable.task_2));
 
+        // 添加一些示例数据
+        taskList = new DataBank().LoadTaskItems(MainActivity.this);
+        if(0==taskList.size()) {
+            taskList.add(new TaskItem("学高数", R.drawable.task_1));
+            taskList.add(new TaskItem("进行Android开发", R.drawable.task_0));
+            taskList.add(new TaskItem("吃饭", R.drawable.task_1));
+            taskList.add(new TaskItem("午休", R.drawable.task_0));
+            taskList.add(new TaskItem("继续进行Android开发", R.drawable.task_1));
+        }
         // 创建适配器并设置给 RecyclerView
-        TaskItemAdapter taskItemAdapter = new TaskItemAdapter(taskList);
+        taskItemAdapter = new TaskItemAdapter(taskList);
         mainRecyclerview.setAdapter(taskItemAdapter);
 
         registerForContextMenu(mainRecyclerview);
@@ -73,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
                         Intent data = result.getData();
 
                         String name = data.getStringExtra("name");
-                        taskList.add(new TaskItem(name,R.drawable.task_2));
+                        taskList.add(new TaskItem(name,R.drawable.task_0));
 //                        TaskItemAdapter.notifyItemInserted(taskList.size());
-
+                        new DataBank().SaveTaskItems(MainActivity.this,taskList);
                         //获取返回的数据
                         // 在这可以根据需要进行进一步处理
                     } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
@@ -83,20 +91,68 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+        updateItemLauncher= registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        int position = data.getIntExtra("position",0);
+                        String name = data.getStringExtra("name");
+                        TaskItem bookItem = taskList.get(position);
+                        bookItem.setName(name);
+                        taskItemAdapter.notifyItemChanged(position);
+
+                        new DataBank().SaveTaskItems(MainActivity.this,taskList);
+
+                        //获取返回的数据//在这塑可以根据需要进行进一步处理
+                    } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
+
+                    }
+                }
+        );
+
+
+
+
     }
     ActivityResultLauncher<Intent> addItemLauncher;
-
+    ActivityResultLauncher<Intent> updateItemLauncher;
+    private static final int MENU_ITEM_ADD = 0;
+    private static final int MENU_ITEM_DELETE = 1;
+    private static final int MENU_ITEM_UPDATE = 2;
     public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item
-                .getMenuInfo();
+        int position = item.getOrder();  // 获取被点击的项的位置
         switch (item.getItemId()) {
-            case 0:
+            case MENU_ITEM_ADD:
                 Intent intent = new Intent(MainActivity.this,TaskItemDetailsActivity.class);
                 addItemLauncher.launch(intent);
                 break;
-            case 1:
+            case MENU_ITEM_DELETE:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Delete Data");
+                builder.setMessage("Are you sure you want to delete this data?");
+                builder.setPositiveButton( "确定",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        taskList.remove(item.getOrder());
+                        taskItemAdapter.notifyItemRemoved(item.getOrder());
+
+
+                        new DataBank().SaveTaskItems(MainActivity.this,taskList);
+                    }
+
+                });
+                builder.setNegativeButton( "取消",new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {}
+                });
+                builder.create().show();
                 break;
-            case 2:
+            case MENU_ITEM_UPDATE:
+                Intent intentUpdate = new Intent(MainActivity.this,TaskItemDetailsActivity.class);
+                TaskItem bookItem = taskList.get(item.getOrder());
+                intentUpdate.putExtra("name",bookItem.getName());
+                intentUpdate.putExtra("position",item.getOrder());
+                updateItemLauncher.launch(intentUpdate);
                 break;
             default:
                 return super.onContextItemSelected(item);
