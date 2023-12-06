@@ -1,6 +1,7 @@
 package com.jnu.student;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class WebViewFragment extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("WebViewFragment", "Creating onCreate");
         if (getArguments() != null) {
 
         }
@@ -34,6 +36,7 @@ public class WebViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.d("WebViewFragment", "Creating onCreateView");
         View rootView = inflater.inflate(R.layout.fragment_web_view, container, false);
         WebView webView = rootView.findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);

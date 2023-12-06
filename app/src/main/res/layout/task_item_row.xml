@@ -25,12 +25,21 @@
 
             <TextView
                 android:id="@+id/text_view_task_title"
-                android:layout_width="match_parent"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="-50dp"
                 android:layout_marginTop="100dp"
                 android:text="@string/taskname1" />
+
+            <TextView
+                android:id="@+id/text_view_task_score"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="-20dp"
+                android:text="@string/taskscore1" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

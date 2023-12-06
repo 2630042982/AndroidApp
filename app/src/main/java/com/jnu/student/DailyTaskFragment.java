@@ -16,36 +16,72 @@ import android.widget.TextView;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
-import com.jnu.student.TaskItem;
-import com.jnu.student.DataBank;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 
-public class ShoppingListFragment extends Fragment {
-    public ShoppingListFragment() {
+
+public class DailyTaskFragment extends Fragment {
+    private ViewPager2 taskViewPager;
+    private TabLayout taskTabLayout;
+    private RecyclerView mainRecyclerView;
+
+    public DailyTaskFragment() {
         // Required empty public constructor
     }
 
-    public static ShoppingListFragment newInstance() {
-        ShoppingListFragment fragment = new ShoppingListFragment();
+    public static DailyTaskFragment newInstance() {
+        DailyTaskFragment fragment = new DailyTaskFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 
         }
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootview = inflater.inflate(R.layout.fragment_shopping_list, container, false);
+//    public class TaskPagerAdapter extends FragmentStateAdapter {
+//        private static final int NUM_TASK_TABS = 4;
+//
+//        public TaskPagerAdapter(FragmentManager fragmentManager, Lifecycle lifecycle) {
+//            super(fragmentManager, lifecycle);
+//        }
+//
+//        public Fragment createFragment(int position) {
+//            // 根据位置返回不同的Fragment
+//            switch (position) {
+//                case 0:
+//                    return new DailyTaskFragment();
+//                case 1:
+//                    return new WeeklyTaskFragment();
+//                case 2:
+//                    return new NormalTaskFragment();
+//                case 3:
+//                    return new DungeonTaskFragment();
+//                default:
+//                    return null;
+//            }
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            return NUM_TASK_TABS;
+//        }
+//    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootview = inflater.inflate(R.layout.fragment_daily_task_list, container, false);
 
         RecyclerView mainRecyclerview = rootview.findViewById(R.id.recycler_view);// 创建布局管理器
         mainRecyclerview.setLayoutManager(new LinearLayoutManager(requireActivity()));
@@ -55,7 +91,7 @@ public class ShoppingListFragment extends Fragment {
 
         taskList = new DataBank().LoadTaskItems(requireActivity());//静态
         if (0 == taskList.size()) {
-            taskList.add(new TaskItem("软件项目管理案例教程（第4版）", R.drawable.task_1));
+            taskList.add(new TaskItem("添加第一个活动", R.drawable.task_0,0));
         }
         taskItemAdapter = new TaskItemAdapter(taskList);
         mainRecyclerview.setAdapter(taskItemAdapter);
@@ -69,11 +105,12 @@ public class ShoppingListFragment extends Fragment {
                         Intent data = result.getData();
 
                         String name = data.getStringExtra("name");
-                        taskList.add(new TaskItem(name, R.drawable.task_0));
+                        int score = data.getIntExtra("score",0);
+                        taskList.add(new TaskItem(name, R.drawable.task_1,score));
                         taskItemAdapter.notifyItemInserted(taskList.size());
 
 
-                        new DataBank().SaveTaskItems(requireActivity(), taskList);
+                        new DataBank_reward().SaveTaskItems(requireActivity(), taskList);
 
                         //获取返回的数据//在这塑可以根据需要进行进一步处理
                     } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
@@ -101,11 +138,9 @@ public class ShoppingListFragment extends Fragment {
                 }
         );
         return rootview;
-
-
     }
 
-    //将 shopItems 和 shopItemAdapter 定义为类的成员变量
+    //将 taskItems 和 taskItemAdapter 定义为类的成员变量
     private ArrayList<TaskItem> taskList = new ArrayList<>();
     private TaskItemAdapter taskItemAdapter;
     ActivityResultLauncher<Intent> addItemLauncher;

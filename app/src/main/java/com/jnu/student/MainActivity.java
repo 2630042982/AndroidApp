@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 //    private TaskItemAdapter taskItemAdapter;
 //    private ArrayList<TaskItem> taskList=new ArrayList<>();
 //    private String []tabHeaderStrings = {"Shopping items","baidu maps","News"};
-    private String []tabHeaderStrings  = {"图书","地图","新闻"};
+    private String []tabHeaderStrings  = {"任务","奖励","统计","我"};
 //    private MyAdapter adapter;
 //    private MyAdapter context_menu_adapter;
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class FragmentAdapter extends FragmentStateAdapter {
-        private static final int NUM_TABS = 3;
+        private static final int NUM_TABS = 4;
 
         public FragmentAdapter(FragmentManager fragmentManager, Lifecycle lifecycle) {
             super(fragmentManager, lifecycle);
@@ -81,11 +81,14 @@ public class MainActivity extends AppCompatActivity {
         public Fragment createFragment(int position) {
             switch (position) {
                 case 0:
-                    return new ShoppingListFragment();
+                    return new TaskListFragment();
                 case 1:
-                    return new TencentMapFragment();
+                    return new AwardFragment();
+//                    return new DailyTaskFragment();
                 case 2:
-                    return new WebViewFragment();
+                    return new StatisticsFragment();
+                case 3:
+                    return new MineFragment();
                 default:
                     return null;
             }

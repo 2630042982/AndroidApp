@@ -7,4 +7,5 @@
     <string name="string_ok">ok</string>
     <string name="string_null"> </string>
     <string name="taskname1">task1</string>
+    <string name="taskscore1">10</string>
 </resources>

@@ -19,6 +19,12 @@
         <activity
             android:name=".TaskItemDetailsActivity"
             android:exported="false" />
+
+
+        <activity
+            android:name=".TaskListFragment"
+            android:exported="false" />
+
         <activity
         android:name=".MainActivity"
         android:exported="true"
