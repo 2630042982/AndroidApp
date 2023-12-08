@@ -106,7 +106,7 @@ public class AwardFragment extends Fragment {
                         Intent data = result.getData();
 
                         String name = data.getStringExtra("name");
-                        int score = data.getIntExtra("score",2);
+                        int score = data.getIntExtra("score",0);
                         taskList.add(new TaskItem(name, R.drawable.task_1,score));
                         taskItemAdapter.notifyItemInserted(taskList.size());
 
@@ -125,7 +125,7 @@ public class AwardFragment extends Fragment {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         int position = data.getIntExtra("position", 0);
-                        int score = data.getIntExtra("score",3);
+                        int score = data.getIntExtra("score",0);
                         String name = data.getStringExtra("name");
                         TaskItem taskItem = taskList.get(position);
                         taskItem.setName(name);
@@ -193,7 +193,8 @@ public class AwardFragment extends Fragment {
                 break;
             case MENU_ITEM_FINISH:
                 //以下为扣除积分
-
+                MainActivity.scoreList.add(new ScoreList(taskList.get(item.getOrder()).getName(),-taskList.get(item.getOrder()).getscore(),System.currentTimeMillis()));
+                new DataBank_total().SaveTaskItems(requireActivity(), MainActivity.scoreList);
                 //以下为删除任务
                 taskList.remove(item.getOrder());
                 taskItemAdapter.notifyItemRemoved(item.getOrder());
@@ -269,7 +270,7 @@ public class AwardFragment extends Fragment {
             // Get element from your dataset at this position and replace the
             // contents of the view with that element
             viewHolder.getTextViewName().setText(taskItemArrayList.get(position).getName());
-            viewHolder.getTextViewScore().setText(Integer.toString(taskItemArrayList.get(position).getscore()));
+            viewHolder.getTextViewScore().setText('-'+Integer.toString(taskItemArrayList.get(position).getscore()));
             viewHolder.getImageViewNameItem().setImageResource(taskItemArrayList.get(position).getImageId());
         }
 
