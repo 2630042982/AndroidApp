@@ -92,7 +92,7 @@ public class AwardFragment extends Fragment {
 
         taskList = new DataBank_reward().LoadTaskItems(requireActivity());//静态
         if (0 == taskList.size()) {
-            taskList.add(new TaskItem("添加第一个奖励", R.drawable.task_1,1));
+            taskList.add(new TaskItem("添加第一个奖励", R.drawable.task_1,0));
         }
         taskItemAdapter = new TaskItemAdapter(taskList);
         mainRecyclerview.setAdapter(taskItemAdapter);
@@ -185,8 +185,9 @@ public class AwardFragment extends Fragment {
                 break;
             case MENU_ITEM_UPDATE:
                 Intent intentUpdate = new Intent(requireActivity(), TaskItemDetailsActivity.class);
-                TaskItem bookItem = taskList.get(item.getOrder());
-                intentUpdate.putExtra("name", bookItem.getName());
+                TaskItem taskItem = taskList.get(item.getOrder());
+                intentUpdate.putExtra("name", taskItem.getName());
+                intentUpdate.putExtra("score", taskItem.getscore());
                 intentUpdate.putExtra("position", item.getOrder());
                 updateItemLauncher.launch(intentUpdate);
                 break;
@@ -237,14 +238,9 @@ public class AwardFragment extends Fragment {
                 taskitemView.setOnCreateContextMenuListener(this);
             }
 
-            public TextView getTextViewName() {
-                return textViewName;
-            }
+            public TextView getTextViewName() { return textViewName; }
             public TextView getTextViewScore(){ return textViewScore; }
-
-            public ImageView getImageViewNameItem() {
-                return ImageViewNameItem;
-            }
+            public ImageView getImageViewNameItem() { return ImageViewNameItem; }
         }
 
 
@@ -254,9 +250,7 @@ public class AwardFragment extends Fragment {
          * @param dataSet String[] containing the data to populate views to be used
          *                by RecyclerView
          */
-        public TaskItemAdapter(ArrayList<TaskItem> dataSet) {
-            taskItemArrayList = dataSet;
-        }
+        public TaskItemAdapter(ArrayList<TaskItem> dataSet) { taskItemArrayList = dataSet; }
 
         // Create new views (invoked by the layout manager)
         @Override
@@ -275,7 +269,7 @@ public class AwardFragment extends Fragment {
             // Get element from your dataset at this position and replace the
             // contents of the view with that element
             viewHolder.getTextViewName().setText(taskItemArrayList.get(position).getName());
-//            viewHolder.getTextViewScore().setText(taskItemArrayList.get(position).getscore());
+            viewHolder.getTextViewScore().setText(Integer.toString(taskItemArrayList.get(position).getscore()));
             viewHolder.getImageViewNameItem().setImageResource(taskItemArrayList.get(position).getImageId());
         }
 
