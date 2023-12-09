@@ -24,5 +24,8 @@ public class ScoreList implements Serializable {
     public String getName() {
         return name;
     }
-
+    public long getTime() {
+        return time;
+    }
+//在android开发中，我有一个ScoreList类型数组A，每个ScoreList有String name，int score，long time这三个值，我想将时间和score绘制一个折线图
 }
