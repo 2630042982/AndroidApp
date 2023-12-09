@@ -145,6 +145,7 @@ public class AwardFragment extends Fragment {
 
     //将 taskItems 和 taskItemAdapter 定义为类的成员变量
     private ArrayList<TaskItem> taskList = new ArrayList<>();
+    private ArrayList<ScoreList> scoreList = new ArrayList<>();
     private TaskItemAdapter taskItemAdapter;
     ActivityResultLauncher<Intent> addItemLauncher;
     ActivityResultLauncher<Intent> updateItemLauncher;
@@ -193,8 +194,9 @@ public class AwardFragment extends Fragment {
                 break;
             case MENU_ITEM_FINISH:
                 //以下为扣除积分
-                MainActivity.scoreList.add(new ScoreList(taskList.get(item.getOrder()).getName(),-taskList.get(item.getOrder()).getscore(),System.currentTimeMillis()));
-                new DataBank_total().SaveTaskItems(requireActivity(), MainActivity.scoreList);
+                scoreList = new DataBank_total().LoadTaskItems(requireActivity());
+                scoreList.add(new ScoreList(taskList.get(item.getOrder()).getName(),-taskList.get(item.getOrder()).getscore(),System.currentTimeMillis()));
+                new DataBank_total().SaveTaskItems(requireActivity(), scoreList);
                 //以下为删除任务
                 taskList.remove(item.getOrder());
                 taskItemAdapter.notifyItemRemoved(item.getOrder());

@@ -23,6 +23,7 @@ public class DataBank_total {
             Log.d("Serialization", "Data loaded successfully.item count: " + data.size());
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+            Log.d("test", "无法加载得分数据" + data.size());
 
         }
         return data;

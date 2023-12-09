@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
 //    private ArrayList<TaskItem> taskList=new ArrayList<>();
 //    private String []tabHeaderStrings = {"Shopping items","baidu maps","News"};
     private String []tabHeaderStrings  = {"任务","奖励","统计","我"};
-    public static ArrayList<ScoreList> scoreList; //定义全局变量
 
 //    private MyAdapter adapter;
 //    private MyAdapter context_menu_adapter;
@@ -74,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        // 初始化得分数组
-        scoreList = new DataBank_total().LoadTaskItems(getApplicationContext());//静态
 
     }
 //    private int calculateTotalScore() {
