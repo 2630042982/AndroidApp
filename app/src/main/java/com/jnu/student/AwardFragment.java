@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -91,9 +92,10 @@ public class AwardFragment extends Fragment {
         taskList = new ArrayList<>();
 
         taskList = new DataBank_reward().LoadTaskItems(requireActivity());//静态
-        if (0 == taskList.size()) {
-            taskList.add(new TaskItem("添加第一个奖励", R.drawable.task_1,0));
-        }
+//        //没有添加按钮时，默认生成一个奖励活动，score为0
+//        if (0 == taskList.size()) {
+//            taskList.add(new TaskItem("添加第一个奖励", R.drawable.task_1,0));
+//        }
         taskItemAdapter = new TaskItemAdapter(taskList);
         mainRecyclerview.setAdapter(taskItemAdapter);
 
@@ -209,7 +211,21 @@ public class AwardFragment extends Fragment {
         }
         return true;
     }
+    public void onViewCreated( View view,  Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        // 获取Button对象
+        Button myButton = view.findViewById(R.id.menu_add);
+
+        // 为Button设置点击事件监听器
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), TaskItemDetailsActivity.class);
+                addItemLauncher.launch(intent);
+            }
+        });
+    }
     public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.ViewHolder> {
 
         private ArrayList<TaskItem> taskItemArrayList;
