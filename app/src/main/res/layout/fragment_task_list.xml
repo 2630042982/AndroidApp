@@ -1,31 +1,52 @@
-<!-- fragment_task_list.xml -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
+<!--&lt;!&ndash; fragment_task_list.xml &ndash;&gt;-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent">-->
 
-<androidx.viewpager2.widget.ViewPager2
-    android:id="@+id/task_view_pager"
+<!--<androidx.viewpager2.widget.ViewPager2-->
+<!--    android:id="@+id/task_view_pager"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="0dp"-->
+<!--    android:layout_weight="1" />-->
+
+<!--<com.google.android.material.tabs.TabLayout-->
+<!--    android:id="@+id/task_tab_layout"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_below="@id/task_view_pager"-->
+<!--    />-->
+
+<!--&lt;!&ndash;    <androidx.recyclerview.widget.RecyclerView&ndash;&gt;-->
+<!--&lt;!&ndash;        android:id="@+id/recycler_view"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_alignParentTop="true"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_marginTop="80dp" />&ndash;&gt;-->
+
+
+<!--    &lt;!&ndash;        app:tabMode="fixed"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:tabGravity="fill" &ndash;&gt;-->
+
+
+<!--</RelativeLayout>-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1" />
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabTextAppearance="@style/CustomTabTextAppearance">
 
-<com.google.android.material.tabs.TabLayout
-    android:id="@+id/task_tab_layout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/task_view_pager"
-    />
+    </com.google.android.material.tabs.TabLayout>
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recycler_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_marginTop="80dp" />-->
-
-
-    <!--        app:tabMode="fixed"-->
-<!--        app:tabGravity="fill" -->
-
-
-</RelativeLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.viewpager2.widget.ViewPager2>
+</LinearLayout>
