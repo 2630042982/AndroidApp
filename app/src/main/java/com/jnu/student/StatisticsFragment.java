@@ -66,7 +66,7 @@ public class StatisticsFragment extends Fragment {
 private void updateLineChart() {
     // 准备折线图数据
     List<Entry> entries = new ArrayList<>();
-    for (int i = 0; i < scoreList.size(); i++) {
+    for (int i = scoreList.size()-5; i < scoreList.size(); i++) {
         int sum = 0;
         for(int j = 0; j <= i; j++){
             ScoreList data = scoreList.get(j);

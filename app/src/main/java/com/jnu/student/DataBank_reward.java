@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class DataBank_reward {
-    final String DATA_FILENAME="rewardList.data";
+    final String DATA_FILENAME="rewardList2.data";
     public ArrayList<TaskItem> LoadTaskItems(Context context) {
         ArrayList<TaskItem> data = new ArrayList<>();
         try {

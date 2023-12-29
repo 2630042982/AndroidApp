@@ -34,6 +34,7 @@ import java.util.ArrayList;
 public class AwardFragment extends Fragment {
     private ViewPager2 taskViewPager;
     private TabLayout taskTabLayout;
+    public static TextView coinsTextView;
     private RecyclerView mainRecyclerView;
 
     public AwardFragment() {
@@ -142,6 +143,21 @@ public class AwardFragment extends Fragment {
                     }
                 }
         );
+        coinsTextView = rootview.findViewById(R.id.textView_coins);
+        // 获取传递过来的总和
+        int totalScore = 0;
+        scoreList = new DataBank_total().LoadTaskItems(requireActivity());
+        for (ScoreList score : scoreList) {
+            totalScore += score.getScore();
+        }
+        if (Coins.coins < 0) {
+            coinsTextView.setTextColor(getResources().getColor(R.color.light_red, requireContext().getTheme()));
+        }
+        else {
+            coinsTextView.setTextColor(getResources().getColor(R.color.black, requireContext().getTheme()));
+        }
+//        coinsTextView.setText(String.valueOf(Coins.coins));
+        coinsTextView.setText(String.valueOf(totalScore));
         return rootview;
     }
 

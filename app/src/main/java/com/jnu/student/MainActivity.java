@@ -41,10 +41,9 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.jnu.student.TaskItem;
 import com.jnu.student.DataBank;
 
-//1.奖励迁移到任务上
-//2.任务分每日每周等
-//3.对号完成任务
-//4.页面1，2显示总分
+//✔1.奖励迁移到任务✔
+//✔2.任务分每日每周等✔
+//4.✔页面1，2显示总分✔
 //5.统计显示月度账单
 //6.我的钱包，退出登录，说明
 public class MainActivity extends AppCompatActivity {
