@@ -102,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
                     return new AwardFragment();
 //                    return new DailyTaskFragment();
                 case 2:
-                    return new StatisticsFragment();
+//                    return new StatisticsFragment();
+                    return new StatisticsListFragment();
                 case 3:
                     return new MineFragment();
                 default:
