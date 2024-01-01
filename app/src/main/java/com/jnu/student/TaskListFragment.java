@@ -33,27 +33,6 @@ public class TaskListFragment extends Fragment {
     static ViewPager2 viewPager;
     // 添加顶部导航栏的标签
     private String[] taskTabTitles = {"每日任务", "每周任务", "普通任务", "副本任务"};
-//    private ViewPager2 taskViewPager;
-//    private TabLayout taskTabLayout;
-//    private RecyclerView mainRecyclerView;
-
-//    public TaskListFragment() {
-//        // Required empty public constructor
-//    }
-
-//    public static TaskListFragment newInstance() {
-//        TaskListFragment fragment = new TaskListFragment();
-//        Bundle args = new Bundle();
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
-//    public void onCreate( LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//
-//        }
-//    }
 
 
 

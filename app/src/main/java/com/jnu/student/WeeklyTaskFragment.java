@@ -17,15 +17,11 @@ import android.widget.TextView;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 
@@ -54,34 +50,6 @@ public class WeeklyTaskFragment extends Fragment {
         }
     }
 
-    //    public class TaskPagerAdapter extends FragmentStateAdapter {
-//        private static final int NUM_TASK_TABS = 4;
-//
-//        public TaskPagerAdapter(FragmentManager fragmentManager, Lifecycle lifecycle) {
-//            super(fragmentManager, lifecycle);
-//        }
-//
-//        public Fragment createFragment(int position) {
-//            // 根据位置返回不同的Fragment
-//            switch (position) {
-//                case 0:
-//                    return new DailyTaskFragment();
-//                case 1:
-//                    return new WeeklyTaskFragment();
-//                case 2:
-//                    return new NormalTaskFragment();
-//                case 3:
-//                    return new DungeonTaskFragment();
-//                default:
-//                    return null;
-//            }
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return NUM_TASK_TABS;
-//        }
-//    }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_daily_task_list, container, false);
 

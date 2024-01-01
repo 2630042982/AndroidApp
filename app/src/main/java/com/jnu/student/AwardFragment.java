@@ -18,15 +18,11 @@ import android.widget.TextView;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 
@@ -55,34 +51,6 @@ public class AwardFragment extends Fragment {
         }
     }
 
-    //    public class TaskPagerAdapter extends FragmentStateAdapter {
-//        private static final int NUM_TASK_TABS = 4;
-//
-//        public TaskPagerAdapter(FragmentManager fragmentManager, Lifecycle lifecycle) {
-//            super(fragmentManager, lifecycle);
-//        }
-//
-//        public Fragment createFragment(int position) {
-//            // 根据位置返回不同的Fragment
-//            switch (position) {
-//                case 0:
-//                    return new AwardFragment();
-//                case 1:
-//                    return new WeeklyTaskFragment();
-//                case 2:
-//                    return new NormalTaskFragment();
-//                case 3:
-//                    return new DungeonTaskFragment();
-//                default:
-//                    return null;
-//            }
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return NUM_TASK_TABS;
-//        }
-//    }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_daily_task_list, container, false);
 
@@ -93,10 +61,6 @@ public class AwardFragment extends Fragment {
         taskList = new ArrayList<>();
 
         taskList = new DataBank_reward().LoadTaskItems(requireActivity());//静态
-//        //没有添加按钮时，默认生成一个奖励活动，score为0
-//        if (0 == taskList.size()) {
-//            taskList.add(new TaskItem("添加第一个奖励", R.drawable.task_1,0));
-//        }
         taskItemAdapter = new TaskItemAdapter(taskList);
         mainRecyclerview.setAdapter(taskItemAdapter);
 
@@ -246,10 +210,6 @@ public class AwardFragment extends Fragment {
 
         private ArrayList<TaskItem> taskItemArrayList;
 
-        /**
-         * Provide a reference to the type of views that you are using
-         * (custom ViewHolder)
-         */
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
             private final TextView textViewName;
             private final ImageView ImageViewNameItem;
@@ -279,12 +239,6 @@ public class AwardFragment extends Fragment {
         }
 
 
-        /**
-         * Initialize the dataset of the Adapter
-         *
-         * @param dataSet String[] containing the data to populate views to be used
-         *                by RecyclerView
-         */
         public TaskItemAdapter(ArrayList<TaskItem> dataSet) { taskItemArrayList = dataSet; }
 
         // Create new views (invoked by the layout manager)
@@ -297,18 +251,14 @@ public class AwardFragment extends Fragment {
         }
 
 
-        // Replace the contents of a view (invoked by the layout manager)
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-            // Get element from your dataset at this position and replace the
-            // contents of the view with that element
             viewHolder.getTextViewName().setText(taskItemArrayList.get(position).getName());
             viewHolder.getTextViewScore().setText('-'+Integer.toString(taskItemArrayList.get(position).getscore()));
             viewHolder.getImageViewNameItem().setImageResource(taskItemArrayList.get(position).getImageId());
         }
 
-        // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
             return taskItemArrayList.size();

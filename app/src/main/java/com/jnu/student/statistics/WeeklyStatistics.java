@@ -35,7 +35,6 @@ public class WeeklyStatistics extends Fragment {
         for (ScoreList score : scoreList) {
             totalScore += score.getScore();
         }
-//        int totalScore = requireActivity().getIntent().getIntExtra("total_score", 0);
 
         // 在 TextView 中显示总和
         TextView totalScoreTextView = view.findViewById(R.id.total_score);

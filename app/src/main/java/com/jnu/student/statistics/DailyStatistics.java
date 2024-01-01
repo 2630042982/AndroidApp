@@ -18,20 +18,12 @@ import com.jnu.student.ScoreList;
 
 import androidx.fragment.app.Fragment;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 
-////////////////////////////////////////////////////
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
-////////////////////////////////////////////////////
 public class DailyStatistics extends Fragment {
     private ArrayList<ScoreList> scoreList = new ArrayList<>();
     private LineChart lineChart;

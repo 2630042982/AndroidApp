@@ -3,6 +3,8 @@ package com.jnu.student;
 import android.content.Context;
 import android.util.Log;
 
+import com.jnu.student.ScoreList;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;

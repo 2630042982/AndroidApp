@@ -6,10 +6,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.jnu.student.DailyTaskFragment;
-import com.jnu.student.NormalTaskFragment;
-import com.jnu.student.WeeklyTaskFragment;
-import com.jnu.student.DungeonTaskFragment;
 import com.jnu.student.statistics.DailyStatistics;
 import com.jnu.student.statistics.MonthlyStatistics;
 import com.jnu.student.statistics.WeeklyStatistics;
@@ -26,7 +22,6 @@ public class PagerAdapter2 extends FragmentStateAdapter {
         switch (position) {
             case 0:
                 return new DailyStatistics(); //
-//                return new StatisticsFragment(); //
             case 1:
                 return new WeeklyStatistics(); //
             case 2:

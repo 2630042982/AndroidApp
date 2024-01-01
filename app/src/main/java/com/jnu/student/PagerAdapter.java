@@ -6,11 +6,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.jnu.student.DailyTaskFragment;
-import com.jnu.student.NormalTaskFragment;
-import com.jnu.student.WeeklyTaskFragment;
-import com.jnu.student.DungeonTaskFragment;
-
 public class PagerAdapter extends FragmentStateAdapter {
     public PagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
