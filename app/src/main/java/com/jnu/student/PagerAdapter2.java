@@ -11,6 +11,7 @@ import com.jnu.student.NormalTaskFragment;
 import com.jnu.student.WeeklyTaskFragment;
 import com.jnu.student.DungeonTaskFragment;
 import com.jnu.student.statistics.DailyStatistics;
+import com.jnu.student.statistics.MonthlyStatistics;
 import com.jnu.student.statistics.WeeklyStatistics;
 
 public class PagerAdapter2 extends FragmentStateAdapter {
@@ -29,6 +30,8 @@ public class PagerAdapter2 extends FragmentStateAdapter {
             case 1:
                 return new WeeklyStatistics(); //
             case 2:
+                return new MonthlyStatistics(); //
+            case 3:
                 return new StatisticsFragment(); //
             default:
                 return null;
@@ -38,6 +41,6 @@ public class PagerAdapter2 extends FragmentStateAdapter {
     @Override
     public int getItemCount() {
         //Tab数目
-        return 3;
+        return 4;
     }
 }

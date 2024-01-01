@@ -42,11 +42,11 @@ public class StatisticsListFragment extends Fragment {
                             tab.setText("每周统计");
                             break;
                         case 2:
+                            tab.setText("每月统计");
+                            break;
+                        case 3:
                             tab.setText("全部统计");
                             break;
-//                        case 3:
-//                            tab.setText("副本任务");
-//                            break;
                     }
                 }).attach();
 
